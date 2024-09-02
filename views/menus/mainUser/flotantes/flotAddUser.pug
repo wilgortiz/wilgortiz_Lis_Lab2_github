@@ -1,0 +1,27 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") New User:
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="firstName") First Name:
+            input(class="py-2 inputses2 h6 m-2 " id="firstName" name="firstName" type="text")
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="lastName") Last Name:
+            input(class="py-2 inputses2 h6 m-2" id="lastName" name="lastName" type="text")
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="dni") Dni:
+            input(class="py-2 inputses2 h6 m-2 " id="dni" name="dni" type="text")
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="email") Email:
+            input(class="py-2 inputses2 h6 m-2" id="email" name="email" type="text")
+    .row
+        div(class="col mt-2 d-flex flex-column justify-content-center align-items-center w-50 h6")    
+            select(class="form-select p-2 w-50" id="rol" name="rol" aria-label="Default select example")
+                    option(selected) Rol:
+                    option(value="Bioquimic") Bioquimic
+                    option(value="Tecnic" ) Tecnic
+                    option(value="Administrative" ) Administrative
+    .w-100.d-flex.justify-content-center.mt-3
+        button.btn.btn-primary.text.white(id="btnRegisterUser") Add User

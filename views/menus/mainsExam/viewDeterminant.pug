@@ -1,0 +1,90 @@
+div(class="position-absolute top-50 start-50 translate-middle d-flex invisible" id="invisible" style="z-index:1")
+    div.border.rounded(id="contenedor-flotante")
+div(class="mt-3 p-4 border shadow-sm bg-white d-flex flex-column w-100 h-100 rounded" id="viewDeterminant") 
+    p(class="letraChida h4") Determinaciones
+    //-Create your determinant or search for an existing one to modify or delete.
+    span(class="letraChida h6 text-secondary") 
+    .row.border.my-4.rounded.bg-white.shadow-sm(id="contenido-determinant")
+      .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+           p(class="letraChida h5 p-3") Determinaciones:
+           .position-relative.mx-1
+                input(class="inputSearch rounded-pill h6 p-2" placeholder="nombre" id="nameDeterminantSearch" name="nameDeterminantSearch" type="text")
+                .d-flex.align-items-center.position-absolute.end-0.top-50.px-2
+                    i(class="fa-solid fa-magnifying-glass fa-xs agrandar" style="color: rgba(255, 255, 255, 0.648);" id="btnSearchDeterminant")
+           .d-flex.justify-content-center.p-3.w-100.align-items-end.flex-column
+                i(class="fa-solid fa-plus text-white agrandar h4" id="btnAddDeterminant") 
+      div(class="table-responsive mt-4" id="tabla-determinants")
+                    table(class="table  table-hover h6 mt-3 rounded")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") estado
+                                th(scope="col") Nombre
+                                th(scope="col") Abreviacion                                
+                                th(scope="col") Unidad de Medida
+                                th(scope="col") Detalle
+                                th(scope="col") Valores Referencia 
+                                th(scope="col") Modificar 
+                                th(scope="col") Eliminar 
+                        tbody
+                            each determinant in determinants
+                              - console.log(determinant.id, determinant.active) // Para depuración
+
+                                tr(class= determinant.active === true || determinant.active === 1 ? 'table-success' : 'table-danger')
+
+                                        //-tr(class= determinant.active ? 'table-success' : 'table-danger')
+                                        //-tr(class= determinant.active ? '' : 'table-danger')
+                                    
+                                        th(scope="row")  #{determinant.id}
+                                        td #{determinant.active === true || determinant.active === 1 ? 'Activo' : 'Inactivo'}
+                                        td #{determinant.name}
+                                        td #{determinant.abbreviation}                                        
+                                        td #{determinant.measurement}
+                                        td #{determinant.detail}
+                                        td
+                                            div(class="w-100 text-center")
+                                                a(href="" id=determinant.id class="btnViewValueReference")
+                                                    i(class="fa-solid fa-eye px-1 text-success agrandar")
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=determinant.id class="btnUpdateDeterminant")
+                                                    i(class="fa-solid fa-pen px-1 text-warning agrandar")
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=determinant.id class="btnDeleteDeterminant")
+                                                    i(class="fa-solid fa-trash px-1 text-danger agrandar")
+    .row.border.my-4.rounded.bg-white.shadow-sm.invisible(id="contenido-value")
+      .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+           p(class="letraChida h5 w-25 p-3") Valores de referencia:
+            .d-flex.justify-content-center.p-3.w-100.align-items-end.flex-column
+                i(class="fa-solid fa-plus text-white agrandar h4" id="btnAddValueReference") 
+      div(class="table-responsive mt-4")
+                    table(class="table  table-hover h6 mt-3 rounded")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") Gender
+                                th(scope="col") Age
+                                th(scope="col") Pregnant
+                                th(scope="col") Max. Value
+                                th(scope="col") Min. Value
+                                th(scope="col") Limit max. 
+                                th(scope="col") Limit min. 
+                        tbody
+                                    tr 
+                                        th(scope="row")  
+                                        td 
+                                        td 
+                                        td 
+                                        td 
+                                        td 
+                                        td 
+                                        td 
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id="" class="btnUpdateValue")
+                                                    i(class="fa-solid fa-pen px-1 text-warning agrandar")
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id="" class=" btnDeleteValue")
+                                                    i(class="fa-solid fa-trash px-1 text-danger agrandar")

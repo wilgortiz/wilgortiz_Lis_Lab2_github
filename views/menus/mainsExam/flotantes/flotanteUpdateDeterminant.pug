@@ -1,0 +1,66 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Modificar Determinacion:
+    .row
+        div(class="col p-0 my-3 form-check form-switch d-flex flex-row align-items-center justify-content-start")
+                - if (determinant.active)
+                  input(class="form-check-input h5 mx-2" type="checkbox"  name="active" id="active" checked)
+                - else
+                  input(class="form-check-input h5 mx-2" type="checkbox"  name="active"  id="active")
+                label(class="form-check-label h6" for="btnActive") Active   
+        input(type="hidden" value=determinant.id id="idNewDeterminant")
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start h6")    
+            label(for="nameDeterminant") Nombre determinacion :
+            input(class="py-2 inputses2 h6 m-2 " id="nameDeterminant" name="nameDeterminant" type="text" value=determinant.name)
+        div(class="col my-4 d-flex flex-column justify-content-start h6")    
+            label(for="abbreviationDeterminant") Abreviacion:
+            input(class="py-2 inputses2 h6 m-2" id="abbreviationDeterminant" name="abbreviationDeterminant" type="text" value=determinant.abbreviation)
+    .row
+        div(class="col mt-5 mr-4 d-flex flex-column justify-content-start h6")  
+            label(for="measurementDeterminant") Unidad de medida:   
+            select(class="form-select p-2" id="measurementDeterminant" name="measurementDeterminant" aria-label="Default select example")
+                    option(selected value=determinant.measurement) #{determinant.measurement}
+                    option(value="g") g
+                    option(value="g/dL") g/dL
+                    option(value="g/L") g/L
+                    option(value="mcg") mcg
+                    option(value="mcg/dL") mcg/dL
+                    option(value="mcg/L") mcg/L
+                    option(value="mckat/L") mckat/L
+                    option(value="mcL") mcL
+                    option(value="mcmol/L") mcmol/L
+                    option(value="mEq") mEq
+                    option(value="mEq/L") mEq/L
+                    option(value="mg") mg
+                    option(value="mg/L") mg/L
+                    option(value="mg/dL") mg/dL
+                    option(value="mL") mL
+                    option(value="mm") mm
+                    option(value="mm3") mm3
+                    option(value="mm Hg") mm Hg
+                    option(value="mmol") mmol
+                    option(value="mmol/L") mmol/L
+                    option(value="mUI/L") mUI/L
+                    option(value="mU/g") mU/g
+                    option(value="mU/L") mU/L
+                    option(value="ng/dL") ng/dL
+                    option(value="ng/L") ng/L
+                    option(value="ng/mL") ng/mL
+                    option(value="ng/mL/h") ng/mL/h
+                    option(value="nmol") nmol
+                    option(value="nmol/L") nmol/L
+                    option(value="pg") pg
+                    option(value="pg/mL") pg/mL
+                    option(value="pmol/L") pmol/L
+                    option(value="UI/L") UI/L
+                    option(value="UI/mL") UI/mL
+                    option(value="U/L") U/L
+                    option(value="U/mL") U/mL
+                    option(value="%") %
+                    option(value="Other") Other
+        div(class="col d-flex flex-column justify-content-start h6")  
+            textarea(class="h6 m-2 pt-5" placeholder="Detalles" id="detailDeterminant" name="detailDeterminant" , cols="30", rows="3" value=determinant.detail)
+    .w-100.d-flex.justify-content-center 
+        button.btn.btn-primary.text.white(id="btnRegNewDeterminant") Guardar modificaciones

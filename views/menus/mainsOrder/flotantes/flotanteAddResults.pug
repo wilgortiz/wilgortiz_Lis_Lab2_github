@@ -1,0 +1,97 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Agregar Resultados
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet")
+    script(src="https://kit.fontawesome.com/a076d05399.js", crossorigin="anonymous")
+    style.
+      .bg-custom { background-color: #007bff; }
+      .flotante-bg { 
+        background-color: rgba(255, 255, 255, 1); 
+        border-radius: 15px; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        width: 900px;
+        height: 600px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .flotante-header {
+        flex-shrink: 0;
+      }
+      .flotante-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .patient-info {
+        flex-shrink: 0;
+      }
+      .form-container {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 1rem;
+      }
+      .input-search { border-radius: 50px; padding: 0.25rem 0.75rem; font-size: 0.875rem; }
+      .table th, .table td { vertical-align: middle; }
+      .text-custom { color: #fff; }
+      .min-vh-100 { min-height: 100vh; }
+      .d-flex-center { display: flex; justify-content: center; align-items: center; }
+      .text-green { color: #28a745; } // Agregado para color verde
+  body
+    - // Variable para controlar la visibilidad del botón
+    - let showSaveButton = true
+    .container-fluid.d-flex-center.min-vh-75
+      .flotante-bg
+        .flotante-header.d-flex.flex-row.bg-custom.text-custom.rounded-top.p-3.align-items-center.position-relative
+          .d-flex.flex-column.w-100
+            h3.mb-0.text-center Agregar Resultados
+          button.btn-close.btn-close-white.position-absolute.end-0.top-0.me-3.mt-3#closeResultsFlotante(type="button" aria-label="Close")
+        .flotante-content
+          .patient-info.p-3.bg-light
+            p.mb-1.text-muted.fs-5
+              strong Paciente: 
+              | #{user.first_name} #{user.last_name}
+            p.mb-1.text-muted.fs-5
+              strong Género: 
+              | #{user.gender}
+            p.mb-1.text-muted.fs-5
+              strong Edad: 
+              | #{age} años
+            if user.gender === 'femenino'
+              p.mb-1.text-muted.fs-5
+                strong Estado de embarazo: 
+                | #{user.pregnant ? 'Sí' : 'No'}
+          .form-container
+            form#formAddResults
+              input(type="hidden", name="orderId", value=orderExams[0].orderId)
+              each orderExam in orderExams
+                .card.mb-4
+                  .card-header.bg-light
+                    h4.mb-0= orderExam.Exam.name
+                  .card-body
+                    each determinant in orderExam.Exam.Determinants
+                      .mb-3
+                        label.form-label(for=`determinant-${determinant.id}`)
+                          | #{determinant.name}
+                          small.text-green.ms-2
+                            | #{determinant.measurement}
+                            if determinant.Value_references && determinant.Value_references.length > 0
+                              | - valores de referencia (#{determinant.Value_references[0].min_value} - #{determinant.Value_references[0].max_value})
+                            else
+                              - showSaveButton = false
+                              | - No hay valores de referencia guardados para este tipo de filtro. Por favor, agrega valores de referencia antes de agregar resultados.
+                        input.form-control(type="number", step="0.01", id=`determinant-${determinant.id}`, name=`determinant-${determinant.id}`, required)
+              // Mostrar el botón solo si showSaveButton es true
+              if showSaveButton
+                .d-flex.justify-content-end.mt-3
+                  button.btn.btn-primary(type="submit") Guardar Resultados
+              else
+                p.text-danger.text-center No se puede guardar los resultados sin valores de referencia cargados.
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js")
+    script(src="/scriptsPatient.js")

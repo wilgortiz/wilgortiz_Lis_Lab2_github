@@ -1,0 +1,44 @@
+//- updateOrder.pug
+div(class="position-relative p-5 w-100 bg-light shadow-lg rounded" id="formUpdateOrderContainer")
+  div(class="position-absolute top-0 end-0 m-2")
+    i(class="fa-solid fa-circle-xmark text-danger agrandar cursor-pointer" id="btnCerrarFlotUpdate")
+  legend(class="letraChida h4 mb-4") Actualización de la Orden:
+  form(id="formUpdateOrder" class="needs-validation" novalidate)
+    input(type="hidden" id="orderId" name="id")
+    p(class="letraChida h6 text-muted mb-4") Completa los detalles de la orden:
+    .row.mb-3
+      .col-md-6
+        label(for="updateOrderName" class="form-label") Nombre del paciente:
+        input(type="text" id="updateOrderName" name="patient_name" class="form-control" required)
+        div(class="invalid-feedback") Por favor, ingresa el nombre del paciente.
+      .col-md-6
+        label(for="updateOrderApellido" class="form-label") Apellido del paciente:
+        input(type="text" id="updateOrderApellido" name="patient_apellido" class="form-control" required)
+        div(class="invalid-feedback") Por favor, ingresa el apellido del paciente.
+    .row.mb-3
+      .col-md-6
+        label(for="updateOrderDiagnosis" class="form-label") Diagnóstico:
+        input(type="text" id="updateOrderDiagnosis" name="diagnosis" class="form-control" required)
+        div(class="invalid-feedback") Por favor, ingresa el diagnóstico.
+      .col-md-6
+        label(for="updateOrderPregnant" class="form-label") Embarazada:
+        select(id="updateOrderPregnant" name="pregnant" class="form-select" required)
+          option(value="" disabled selected) Selecciona una opción
+          option(value=1) Sí
+          option(value=0) No
+        div(class="invalid-feedback") Por favor, selecciona una opción.
+    .row.mb-3
+      .col-md-6
+        label(for="updateOrderState" class="form-label") Estado:
+        input(type="text" id="updateOrderState" name="state" class="form-control" required)
+        div(class="invalid-feedback") Por favor, ingresa el estado.
+      .col-md-6
+        label(for="updateOrderFechaIngreso" class="form-label") Fecha:
+        input(type="date" id="updateOrderFechaIngreso" name="updateOrderFechaIngreso" class="form-control" required)
+        div(class="invalid-feedback") Por favor, ingrese la fecha de carga de la orden.
+      .col-md-6
+        label(for="updateOrderEntregaResultados" class="form-label") Fecha:
+        input(type="date" id="updateOrderEntregaResultados" name="updateOrderEntregaResultados" class="form-control" required)
+        div(class="invalid-feedback") Por favor, ingrese la fecha de entrega de resultados
+   
+    button(type="submit" id="btnRegNewOrder" class="btn btn-primary w-100 mt-4") Actualizar Orden

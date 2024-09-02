@@ -1,0 +1,97 @@
+div(class="mt-3 p-4 border shadow-sm bg-white d-flex flex-column w-100 h-100 rounded") 
+  p(class="letraChida h4") Buscar paciente
+  span(class="letraChida h6 text-secondary") Introduce el DNI, email o Apellido del paciente para hacer una búsqueda
+  div(class="pt-2 w-100")
+      .row.px-5.mx-2
+          div(class="col-md-4 mb-3")
+                label(for="dni") Dni:
+                input(class="form-control h4" id="dni" name="dni" type="text" )
+          //div(class="m-4 col position-relative d-flex flex-colum justify-content-start w-25 h6")
+              label(for="dni") Dni:
+              input(class="position-absolute start-0 inputses2 h6 m-2 p-3" id="dni" name="dni" type="text")
+          div(class="col-md-4 mb-3")
+              label(for="email") Email:
+              input(class="form-control h4" id="email" name="email" type="text" )
+          //div(class="m-4 col position-relative d-flex flex-colum justify-content-start w-25 h6")
+              label(for="email") Email:
+              input(class="position-absolute start-0 inputses2 h6 m-2 p-3" id="email" name="email" type="text")
+          div(class="col-md-4 mb-3")
+              label(for="last_name") Apellido:
+              input(class="form-control h4" id="last_name" name="last_name" type="text" )
+          //div(class="m-4 col position-relative d-flex flex-colum justify-content-start w-25 h6")
+              label(for="last_name") Apellido:
+              input(class="position-absolute start-0 inputses2 h6 m-2 p-3" id="last_name" name="last_name" type="text")
+          div(class="m-4 col position-relative d-flex flex-colum justify-content-center align-items-center w-100 h6")
+              button(class="btn text-white rounded letraChida shadow-sm" style="background-color:#007bff;") 
+                  a(class="enlaceSearch d-flex justify-content-center align-items-center w-100 h-100" id="search") 
+                      i(class="fa-solid fa-magnifying-glass px-3" style="color: #ffffff;") 
+  div(class="table-responsive mt-4")
+      table(class="table table-bordered table-hover h6 mt-3")
+          thead(class="")
+              tr(class="")
+                  th(scope="col") ID
+                  th(scope="col") Genero
+                  th(scope="col") nombre
+                  th(scope="col") apellido
+                  th(scope="col") Dni
+                  th(scope="col") telefono
+                  th(scope="col") Email
+                  th(scope="col") ubicacion
+                  th(scope="col") cumpleaños
+                  th(scope="col") actualizar
+                  th(scope="col") eliminar
+          tbody
+                   each user in users
+                    //-- if(user.active && user.gender === 'patient')  // Solo mostrar usuarios con género 'Patient'
+                    - if(user.active && user.rol  === 'patient')
+                      tr  
+                          th(scope="row") #{user.id}
+                          td
+                              div(class="w-100 text-center")
+                               - if (user.gender === 'Male' || user.gender === 'male' || user.gender === 'Hombre' || user.gender === 'masculino')  
+                                 i(class="fa-solid fa-user" style="color: #005eff;") 
+                               - else if (user.gender === 'Female' || user.gender === 'female' || user.gender === 'Mujer' || user.gender === 'femenino')
+                                 i(class="fa-solid fa-user" style="color: #ff00bb;")
+                               - else 
+                                 i(class="fa-solid fa-user" style="color: #fff700;")
+                          td #{user.first_name}
+                          td #{user.last_name}
+                          td #{user.dni}
+                          td #{user.phone}
+                          td #{user.email}                          
+                          td #{user.location}
+                          td #{user.birthdate}
+                          td
+                             div(class="w-100 text-center")
+                                  a(href="" id=user.id class="update2")
+                                      i(class="fa-solid fa-pen update px-1")
+                          td
+                             div(class="w-100 text-center")
+                                  a(href="" class="delete" id=user.id)
+                                      i(class="fa-solid fa-trash enlaceMenu px-1")
+                    // - else
+                    //   tr(class="table-danger")  
+                    //       th(scope="row") #{user.id}
+                    //       td #{user.first_name}
+                    //       td #{user.last_name}
+                    //       td #{user.dni}
+                    //       td #{user.phone}
+                    //       td #{user.email}
+                    //       td
+                    //         div(class="w-100 text-center")
+                    //          - if (user.gender === 'Male')  
+                    //            i(class="fa-solid fa-user" style="color: #005eff;") 
+                    //          - else if (user.gender === 'Female')
+                    //            i(class="fa-solid fa-user" style="color: #ff00bb;")
+                    //          - else 
+                    //            i(class="fa-solid fa-user" style="color: #fff700;")
+                    //       td #{user.location}
+                    //       td #{user.birthdate}
+                    //       td
+                    //        div(class="w-100 text-center")
+                    //             a(href="" id=user.id class="update2")
+                    //                 i(class="fa-solid fa-pen update px-1 text-dark")
+                    //       td
+                    //        div(class="w-100 text-center")
+                    //             a(href="" class="delete" id=user.id)
+                    //                 i(class="fa-solid fa-trash enlaceMenu px-1 text-dark")

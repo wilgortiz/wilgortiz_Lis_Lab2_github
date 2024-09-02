@@ -1,0 +1,9 @@
+extends layout 
+block content
+      include navSuperiorMenu.pug 
+      include navLateralMenu.pug
+      div(class="position-absolute top-1 end-0 pb-3 pt-5 px-3 min-vh-100 w-100 d-flex flex-column bg-gris letraChida" id="contenido-derecho")
+        p(class="letraChida h4 pt-5") Bienvenido #{admin.first_name} #{admin.last_name}
+        span(class="letraChida h6 text-secondary") rol: #{admin.rol}
+        span(class="letraChida h6 text-secondary") 
+        div(class="d-flex justify-content-center align-items-center w-100 h-100")

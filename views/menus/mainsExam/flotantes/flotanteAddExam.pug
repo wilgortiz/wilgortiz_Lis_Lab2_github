@@ -1,0 +1,28 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Nuevo Examen:
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start h6 w-25")    
+            label(for="nameExam") Nombre:
+            input(class="py-2 inputses2 h6 m-2 " id="nameExam" name="nameExam" type="text")
+        div(class="col my-4 d-flex flex-column justify-content-start h6 w-25")    
+            label(for="abbreviationExam") Abreviacion:
+            input(class="py-2 inputses2 h6 m-2 " id="abbreviationExam" name="abbreviationExam" type="text")
+    .row
+        div(class="col d-flex flex-column justify-content-start  h6")    
+            textarea(class="h6 m-2 pt-5" placeholder="detalles" id="detailExam" name="detailExam" , cols="30", rows="3")
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start h6 w-25")
+            label(for="sampleType") Tipo de Muestra:
+            select(class="py-2 inputses2 h6 m-2" id="sampleType" name="sampleType")
+                each sample in samples
+                    option(value=sample.id) #{sample.type}
+    .row 
+        div(class="col my-4 d-flex flex-column justify-content-start h6 w-25")
+            label(for="determinant") Determinaciones:
+            select(class="py-2 inputses2 h6 m-2" id="determinant" name="determinant" multiple)
+                each determinant in determinants
+                    option(value=determinant.id) #{determinant.name}
+    .w-100.d-flex.justify-content-center 
+        button.btn.btn-primary.text.white(id="btnRegisterExam") Agregar examen

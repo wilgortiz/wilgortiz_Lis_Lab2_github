@@ -1,0 +1,22 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") actualizar muestra:
+    .row
+        div(class="col p-0 my-3 form-check form-switch d-flex flex-row align-items-center justify-content-start")
+                - if (sample.active)
+                  input(class="form-check-input h5 mx-2" type="checkbox"  name="active" id="active" checked)
+                - else
+                  input(class="form-check-input h5 mx-2" type="checkbox"  name="active"  id="active")
+                label(class="form-check-label h6" for="btnActive") Active   
+        input(type="hidden" value=sample.id id="idNewSample")
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start h6")    
+            label(for="typeSample") Type:
+            input(class="py-2 inputses2 h6 m-2 " id="typeSample" name="typeSample" type="text" value=sample.type)
+        div(class="col d-flex flex-column justify-content-start h6")  
+            textarea(class="h6 m-2 pt-5" placeholder="Detail..." id="detailSample" name="detailSample" , cols="30", rows="3" value=sample.detail)
+    .w-100.d-flex.justify-content-center 
+            button(type="submit", class="btn btn-primary mt-3 rounded-pill fs-5") actualizar muestra
+        //-button.btn.btn-primary.text.white(id="btnRegNewSample") actualizar muestra
+        //-button.btn.btn-primary.text.white(id="btnUpdateSample") actualizar muestra

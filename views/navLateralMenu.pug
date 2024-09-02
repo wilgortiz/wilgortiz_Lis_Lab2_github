@@ -1,0 +1,56 @@
+//-- views/navLateralMenu.pug
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title 
+    link(rel="stylesheet" href="public/stylesheets/style.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js")
+  body
+    block content
+      nav(class="navbar navbar-expand-lg bg-custom-celeste text-white px-1 py-3 letraChida shadow-sm" style="z-index:3; width: 100%")
+        div(class="container-fluid")
+          div(class="d-flex flex-column justify-content-center align-items-center me-auto")
+            //-img(class="img-fluid rounded-circle w-50" src="images/perfil-de-usuario.webp" alt="" id="imagen" style="width: 50px; height: 50px;")
+            //-img(class="img-fluid rounded-circle w-50" src="images/perfil-de-usuario.webp" alt="" id="imagen" style="width: 50px; height: 50px;")
+            span(class="letraChida h5 mt-1") #{admin.first_name+" "+admin.last_name}
+            span(class="letraChida h6 text-white") #{admin.rol}
+          ul(class="navbar-nav ms-auto sinPunto h6 text-gris d-flex align-items-center")
+            - if (admin.rol=="Administrative")
+              li(class="nav-item mx-2")
+                a(href="" id="patient" class="nav-link enlace text-white d-flex align-items-center custom-nav-link")
+                  i(class="fas fa-user-md mx-2")
+                  p(class="mb-0 textos-cabecera") |Pacientes|
+            - if (admin.rol=="Administrative" || admin.rol=="Bioquimic" || admin.rol=="Tecnic")
+              li(class="nav-item mx-2")
+                a(href="" id="order" class="nav-link enlace text-white d-flex align-items-center custom-nav-link")
+                  i(class="fas fa-briefcase-medical mx-1")
+                  p(class="mb-0 textos-cabecera") |Orden de Trabajo|
+            - if (admin.rol=="Bioquimic" || admin.rol=="Tecnic")
+              li(class="nav-item mx-2")
+                a(href="" id="exam" class="nav-link enlace text-white d-flex align-items-center custom-nav-link")
+                  i(class="fas fa-file-medical mx-1")
+                  p(class="mb-0 textos-cabecera") |Examenes-Muestras-Determinaciones| 
+            - if (admin.rol=="Administrative")
+              li(class="nav-item mx-2")
+                a(href="" id="user" class="nav-link enlace text-white d-flex align-items-center custom-nav-link")
+                  i(class="fas fa-users mx-2")
+                  p(class="mb-0 textos-cabecera") |Administrador de usuarios|
+            - if (admin.rol=="Administrative")
+              li(class="nav-item mx-2")
+                a(href="/main/audit" id="audit" class="nav-link enlace text-white d-flex align-items-center custom-nav-link")
+                  i(class="fas fa-calendar-alt mx-2")
+                  p(class="mb-0 textos-cabecera") |Auditoria|
+            - if (admin.rol=="Administrative" || admin.rol=="Bioquimic" || admin.rol=="Tecnic")
+              li(class="nav-item mx-2")
+                a(href="#" class="nav-link enlace text-white d-flex align-items-center custom-nav-link" id="newSignOffButton")
+                  i(class="fas fa-sign-out-alt mx-2")
+                  p(class="mb-0 textos-cabecera") Cerrar sesión
+              //li(class="nav-item mx-2")
+                a(href="" class="nav-link enlace text-white d-flex align-items-center custom-nav-link")
+                  i(class="fas fa-sign-out-alt mx-2")
+                  p(class="mb-0 textos-cabecera") Cerrar sesión  
+script(src="/loginRoutes.js")

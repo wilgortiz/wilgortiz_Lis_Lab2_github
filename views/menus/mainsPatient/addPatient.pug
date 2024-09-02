@@ -1,0 +1,154 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Registrar Paciente
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet")
+    script(src="https://kit.fontawesome.com/a076d05399.js", crossorigin="anonymous")
+    style.
+      .bg-custom { background-color: #007bff; }
+      .input-search { border-radius: 50px; padding: 0.25rem 0.75rem; font-size: 0.875rem; }
+      .table th, .table td { vertical-align: middle; }
+      .text-custom { color: #fff; }
+      .close-btn { position: absolute; top: 0.5rem; right: 0.5rem; cursor: pointer; font-size: 1.25rem; color: #fff; }
+      .flotante-bg { background-color: rgba(255, 255, 255, 1); border-radius: 15px; padding: 1rem; }
+  body
+    .container.mt-5
+      .row.justify-content-center
+        .col-lg-8.col-md-10.col-sm-12
+          .p-4.border.rounded.bg-light.shadow-sm
+            h2.text-center.mb-4.text-primary Registrar Paciente
+            p.text-center.text-secondary.mb-4 Ingrese la información del nuevo paciente
+            
+            form(id="registerForm", class="needs-validation", method="POST", action="/registerUser", novalidate)
+              legend.mb-4.h4.text-primary Información del Paciente
+
+              .row
+                
+                .col-md-4.mb-3
+                  label(for="first_name", class="form-label") Nombre
+                  input(type="text", class="form-control", id="first_name", name="first_name", required)
+                  div(class="invalid-feedback") Por favor, ingrese el nombre.
+
+                .col-md-4.mb-3
+                  label(for="last_name", class="form-label") Apellido
+                  input(type="text", class="form-control", id="last_name", name="last_name", required)
+                  div(class="invalid-feedback") Por favor, ingrese el apellido.
+
+                .col-md-4.mb-3
+                  label(for="dni", class="form-label") DNI
+                  input(type="text", class="form-control", id="dni", name="dni", required)
+                  div(class="invalid-feedback") Por favor, ingrese el DNI.
+                  
+              .row
+                .col-md-4.mb-3
+                  label(for="phone", class="form-label") Teléfono
+                  input(type="text", class="form-control", id="phone", name="phone", required)
+                  div(class="invalid-feedback") Por favor, ingrese el teléfono.
+
+                .col-md-4.mb-3
+                  label(for="email", class="form-label") Email
+                  input(type="email", class="form-control", id="email", name="email", required)
+                  div(class="invalid-feedback") Por favor, ingrese un email válido.
+
+                .col-md-4.mb-3
+                  label(for="clave", class="form-label") Contraseña
+                  input(type="password", class="form-control", id="clave", name="clave", required)
+                  div(class="invalid-feedback") Por favor, ingrese una contraseña.
+
+              .row
+                .col-md-4.mb-3
+                  label(for="gender", class="form-label") Género
+                  select(class="form-select", id="gender", name="gender", required)
+                    option(value="", disabled selected) Seleccione
+                    option(value="masculino") masculino
+                    option(value="femenino") femenino
+                    option(value="Otro") otro
+                  div(class="invalid-feedback") Por favor, seleccione el género.
+
+                .col-md-4.mb-3
+                  label(for="location", class="form-label") Ubicación
+                  input(type="text", class="form-control", id="location", name="location", required)
+                  div(class="invalid-feedback") Por favor, ingrese la ubicación.
+
+                .col-md-4.mb-3
+                  label(for="direction", class="form-label") Dirección
+                  input(type="text", class="form-control", id="direction", name="direction", required)
+                  div(class="invalid-feedback") Por favor, ingrese la dirección.
+
+                //.row
+                  .col-md-4.mb-3
+                    label(for="diagnostic", class="form-label") Diagnóstico
+                    input(type="text", class="form-control", id="diagnostic", name="diagnostic", required)
+                    div(class="invalid-feedback") Por favor, ingrese el diagnóstico.
+
+                .col-md-4.mb-3
+                  label(for="birthdate", class="form-label") Fecha de Nacimiento
+                  input(type="date", class="form-control", id="birthdate", name="birthdate", required)
+                  div(class="invalid-feedback") Por favor, ingrese la fecha de nacimiento.
+
+              div.text-center.mt-4
+                button(type="submit", class="btn btn-primary w-50") Registrar
+                
+    script.
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); 
+        const form = event.target;
+        const formData = new FormData(form);
+        const formJSON = Object.fromEntries(formData.entries());
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(formJSON)
+          });
+
+          const data = await response.json().catch(() => response.text()); // Manejar posibles respuestas no JSON
+
+          if (response.ok) {
+            alert(data.message); // Mostrar mensaje de éxito
+            form.reset(); // Limpiar el formulario
+          } else {
+            alert('Error: ' + data.message);
+          }
+        } catch (error) {
+          console.error('Error al enviar el formulario:', error);
+          alert('Ocurrió un error. Por favor intenta de nuevo.');
+        }
+      });
+
+    //document.getElementById('registerForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); 
+        const form = event.target;
+        const formData = new FormData(form);
+        const formJSON = Object.fromEntries(formData.entries());
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('token') // o el método que uses para almacenar el token
+            },
+            body: JSON.stringify(formJSON)
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            alert(data.message); // Mostrar mensaje de éxito
+            form.reset(); // Limpiar el formulario
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error al enviar el formulario:', error);
+          alert('Ocurrió un error. Por favor intenta de nuevo.');
+        }
+      });

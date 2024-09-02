@@ -1,0 +1,12 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Nueva Muestra:
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start h6 w-25")    
+            label(for="typeSample") Tipo de muestra:
+            input(class="py-2 inputses2 h6 m-2 " id="typeSample" name="typeSample" type="text")
+        div(class="col d-flex flex-column justify-content-start  h6")    
+            textarea(class="h6 m-2 pt-5" placeholder="Detalles" id="detailSample" name="detailSample" , cols="30", rows="3")
+    .w-100.d-flex.justify-content-center 
+        button.btn.btn-primary.text.white(id="btnRegisterSample") Agregar Muestra

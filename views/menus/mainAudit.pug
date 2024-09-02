@@ -1,0 +1,101 @@
+// views/menus/mainAudit.pug
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Auditoría
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      .full-width-container {
+        width: 97vw; /* Ancho completo de la ventana */
+        padding: 20px; /* Ajusta el relleno según sea necesario */
+        box-sizing: border-box; /* Incluye padding en el cálculo del ancho total */
+      }
+      .table-container {
+        overflow-x: auto; /* Añade un scroll horizontal si es necesario */
+      }
+      table.table {
+        width: 100%; /* Asegura que la tabla use el ancho completo del contenedor */
+        table-layout: fixed; /* Fija el ancho de las columnas */
+      }
+      th, td {
+        overflow-wrap: break-word; /* Permite el ajuste de texto */
+        word-wrap: break-word; /* Permite el ajuste de texto */
+        font-size: 0.925rem; /* Tamaño de fuente reducido para celdas */
+      }
+      th {
+        background-color: #f8f9fa; /* Color de fondo para el encabezado */
+        color: #000000; /* Color de texto negro */
+      }
+      /* Estilos para los encabezados con fondo azul */
+      th.column-id, th.column-entity, th.column-predeterminado {
+        background-color: rgb(30, 129, 209); /* Color de fondo azul */
+        color: #ffffff; /* Color de texto blanco */
+        font-weight: bold; /* Fuente en negrita */
+        text-align: center; /* Alinear el texto al centro */
+        vertical-align: middle; /* Alinear verticalmente el texto */
+        font-size: 1.2rem; /* Tamaño de fuente más grande */
+      }
+      .column-id {
+        width: 80px; /* Ancho fijo para la columna de ID */
+      }
+      .column-entity {
+        width: 120px; /* Ancho fijo para la columna de entidad */
+      }
+      .column-predeterminado {
+        width: 185px; /* Ancho fijo para la columna Predeterminado */
+      }
+      td {
+        min-height: 40px; /* Altura mínima para las celdas */
+        vertical-align: top; /* Alineación vertical en la parte superior */
+        padding: 8px; /* Espaciado interno */
+      }
+  body
+    .full-width-container
+      //.table-actions
+        button.btn.btn-primary Buscar
+        button.btn.btn-success Insertar
+        button.btn.btn-info Exportar
+        button.btn.btn-warning Importar
+        button.btn.btn-danger Privilegios
+        button.btn.btn-secondary Operaciones
+        button.btn.btn-light Disparadores
+
+      .table-container
+        table.table.table-bordered
+          thead
+            tr
+              th.column-id #
+              //-th.column-entity id              
+              th.column-predeterminado Usuario que realizo la accion
+              th.column-predeterminado Rol del usuario
+              th.column-predeterminado Fecha de la accion
+              th.column-predeterminado Tipo de accion
+              th.column-predeterminado Tipo de entidad
+              th.column-predeterminado Valor antiguo
+              th.column-predeterminado Nuevo valor
+          tbody
+            each audit in audits
+              tr
+                td= audit.id
+                //-td= audit.entityId      
+                td= audit.userName          
+                //td= audit.userName + ' ' + audit.lastName
+                td= audit.userRole
+                td= audit.actionTime
+                td= audit.actionType
+                td= audit.entityType
+                td= audit.oldValue
+                td= audit.newValue
+                //td
+                  button.btn.btn-warning.btn-sm Cambiar
+                  button.btn.btn-danger.btn-sm Eliminar
+
+      .table-pagination
+        button.btn.btn-light Página Anterior
+        button.btn.btn-light Página Siguiente
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")

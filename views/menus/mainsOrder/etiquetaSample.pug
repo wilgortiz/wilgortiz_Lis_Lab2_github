@@ -1,0 +1,19 @@
+div(class="position-relative p-5 w-100 bg-white shadow-sm rounded")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Etiqueta para la muestra:
+    #etiqueta
+        .card.rounded.m-3.p-1.w-75-h6
+            .row 
+                p.h6 #{'N° de Orden: ' + order.id}
+                p.h6 #{'Codigo paciente: ' + user.id}
+            .row 
+                p.h6 #{'Nombre: ' + user.first_name + ' ' + user.last_name}
+                p.h6 #{'Dni: ' + user.dni}
+                p.col.h6 #{'Fecha: '+orderSample.createdAt}
+            .row 
+                
+                //-p.col.text-end.w-100.h6 #{'N° de Orden: ' + order.id}
+    .w-100.d-flex.justify-content-center(id='btnImprimirEtiqueta')
+        .btn.btn-primary imprimir
+            i(class="fa-solid fa-print text-white p-1")

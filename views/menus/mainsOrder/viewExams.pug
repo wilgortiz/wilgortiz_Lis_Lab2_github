@@ -1,0 +1,50 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Exámenes de la Orden
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet")
+    script(src="https://kit.fontawesome.com/a076d05399.js", crossorigin="anonymous")
+  body
+    .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+      if orderExams.length > 0
+        p(class="letraChida h5 p-3") Exámenes del paciente: #{orderExams[0].Order.User.first_name} #{orderExams[0].Order.User.last_name} -id- #{orderExams[0].Order.id} -rol- #{userRole}
+        input(type="hidden" value=orderExams[0].OrderId id="orderId")
+      else
+        //-p(class="letraChida h5 p-3") No hay exámenes asociados a esta orden
+        p(class="letraChida h5 p-3") Orden del paciente: #{order.User.first_name} #{order.User.last_name}
+        input(type="hidden" value=orderId id="orderId")
+      .position-relative.mx-1
+        input(class="inputSearch rounded-pill h6 p-2" placeholder="Nombre" id="nameExamSearch" name="nameExamSearch" type="text")
+        .d-flex.align-items-center.position-absolute.end-0.top-50.px-2
+          i(class="fa-solid fa-magnifying-glass fa-xs agrandar" style="color: rgba(255, 255, 255, 0.648);" id="btnSearchExam")
+      .d-flex.justify-content-center.p-3.w-100.align-items-end.flex-column
+        i(class="fa-solid fa-plus text-white agrandar h4" id="btnAddExam")
+    .table-responsive.mt-4#tabla-exams2
+      if orderExams.length > 0
+        table.table.table-hover.h6.mt-3.rounded
+          thead
+            tr
+              th(scope="col") ID
+              th(scope="col") Nombre
+              th(scope="col") Activo
+              th(scope="col") Abreviatura
+              th(scope="col") Detalle
+              th(scope="col") Eliminar
+          tbody
+            each exam in orderExams
+              tr
+                th(scope="row") #{exam.Exam.id}
+                td #{exam.Exam.name}
+                td #{exam.Exam.active}
+                td #{exam.Exam.abbreviation}
+                td #{exam.Exam.detail}
+                td
+                  div.w-100.text-center
+                    a(href="", class="btnEliminarExam", data-id=`${exam.Exam.id}`)
+                      i(class="fa-solid fa-lg fa-rectangle-xmark px-2 text-danger agrandar")
+      else
+        p No hay exámenes asociados a esta orden, por favor carguelos!
+    script(src="/scriptsPatient.js")

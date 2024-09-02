@@ -1,0 +1,22 @@
+table(class="table  table-hover h6 mt-3 rounded")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") Type
+                                th(scope="col") Detail
+                                th(scope="col") Update 
+                                th(scope="col") Delete 
+                        tbody
+                            each sample in samples
+                                    tr(class= sample.active ? '' : 'table-danger')
+                                        th(scope="row")  #{sample.id}
+                                        td #{sample.type}
+                                        td #{sample.detail}
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=sample.id class="btnUpdateSample")
+                                                    i(class="fa-solid fa-pen px-1 text-warning agrandar")
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=sample.id class="btnDeleteSample")
+                                                    i(class="fa-solid fa-trash px-1 text-danger agrandar")

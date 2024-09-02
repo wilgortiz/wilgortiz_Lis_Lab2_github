@@ -1,0 +1,12 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger")
+    legend(class="letraChida h4") New exam subgroup:
+    .row
+        div(class="position-relative my-4 d-flex flex-colum justify-content-start w-50 h6")    
+            label(for="nameExamSubGroup") Name:
+            input(class="py-4 position-absolute start-0 inputses2 h6 m-2 p-3" id="nameExamSubGroup" name="nameExamSubGroup" type="text")
+        div(class="d-flex flex-colum justify-content-start w-50 h6")    
+            textarea(class="start-0 h6 m-2 p-3" placeholder="Detail.." id="detailExamSubGroup" name="detailExamSubGroup" , cols="30", rows="3")
+    .w-100.d-flex.justify-content-center 
+        button.btn.btn-primary.text.white(id="btnRegisterSubGroup") Add SubGroup

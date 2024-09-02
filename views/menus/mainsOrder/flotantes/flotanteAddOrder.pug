@@ -1,0 +1,31 @@
+div(class="position-relative p-5 w-100 bg-white shadow-sm rounded")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Nueva Orden:
+    p(class="letraChida h6 text-secondary") Seleccionar paciente
+    .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+           p(class="letraChida h5 p-3") Pacientes:
+           .position-relative.mx-1
+                input(class="inputSearch rounded-pill h6 p-2" placeholder="Dni" id="dniPatientSearch" name="dniPatientSearch" type="text")
+                .d-flex.align-items-center.position-absolute.end-0.top-50.px-2
+                    i(class="fa-solid fa-magnifying-glass fa-xs agrandar" style="color: rgba(255, 255, 255, 0.648);" id="btnSearchPatient")
+           .d-flex.justify-content-center.p-3.w-100.align-items-end.flex-column
+                i(class="fa-solid fa-plus text-white agrandar h4" id="btnRegPatient") 
+    div(class="table-responsive mt-4" id="tabla-patients")
+                    table(class="table  table-hover h6 mt-3 rounded")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") Name
+                                th(scope="col") Dni
+                                th(scope="col") Add
+                        tbody
+                            each patient in patients
+                                    tr(class= '')
+                                        th(scope="row")  #{patient.id}
+                                        td #{patient.first_name+' '+patient.last_name}
+                                        td #{patient.dni}
+                                        td
+                                            div(class="w-100 text-center")
+                                                a(href="" id=patient.id class="btnAddPatient")
+                                                    i(class="fa-solid fa-plus px-1 text-success agrandar")

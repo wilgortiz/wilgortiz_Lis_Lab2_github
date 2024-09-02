@@ -1,0 +1,45 @@
+//-- flotanteAddValue.pug --
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Nuevo valor de referencia: 
+    //-input(type="hidden" value=determinant.id id="determinantId")
+    .row        
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="minValue") Valor Minimo:
+            input(class="py-2 inputses2 h6 m-2" id="minValue" name="minValue" type="text")
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="maxValue") Valor Maximo:
+            input(class="py-2 inputses2 h6 m-2 " id="maxValue" name="maxValue" type="text")   
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="maxLimit") Limit max.:
+            input(class="py-2 inputses2 h6 m-2 " id="maxLimit" name="maxlimit" type="text")
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="minLimit") Limit min.:
+            input(class="py-2 inputses2 h6 m-2" id="minLimit" name="minLimit" type="text")
+    .row
+        div(class="col mt-2 d-flex flex-column justify-content-start w-50 h6")    
+            select(class="form-select p-2" id="ageRange" name="ageRange" aria-label="Default select example")
+                option(selected) Rango de edad:
+                option(value="1-10") 1 a 10 años
+                option(value="11-40") 11 a 40 años 
+                option(value="41-100") 41 a 100 años
+
+            //select(class="form-select p-2" id="ageRange" name="ageRange" aria-label="Default select example")
+                    option(selected) Rango de edad:
+                    option(value="child") 1 a 10 años
+                    option(value="adult" ) 11 a 40 años 
+                    option(value="elderly" ) 41 a 100 años
+        div(class="col  mt-2 d-flex flex-column justify-content-start w-50 h6")    
+            select(class="form-select p-2" id="genderValue" name="genderValue" aria-label="Default select example")
+                    option(selected) Genero:
+                    option(value="femenino") femenino 
+                    option(value="masculino") masculino  
+        div(class="col  mt-2 d-flex flex-column justify-content-start w-50 h6")    
+            select(class="form-select p-2" id="pregnant" name="pregnant" aria-label="Default select example")
+                    option(selected) Embarazo:
+                    option(value=1) si
+                    option(value=0) no 
+    .w-100.d-flex.justify-content-center.mt-3
+        button.btn.btn-primary.text.white(id="btnRegisterValue") Agregar Valor

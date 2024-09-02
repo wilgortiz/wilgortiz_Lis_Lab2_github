@@ -1,0 +1,40 @@
+.d-flex.flex-row.bg-color.rounded.text-white.w-100
+    legend(class="letraChida h5 p-3") Determinant #{examSubGroup.name}:
+    .d-flex.justify-content-center.p-3
+        button(class="btn btn-primary rounded text-white" id="btnAddDeterminant")
+            i(class="fa-solid fa-plus px-1 text-white") 
+    input(type="hidden" value=examSubGroup.id id="examSubGroupId")
+div(class="table-responsive mt-4")
+                    table(class="table table-bordered table-hover h6 mt-3")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") Name
+                                th(scope="col") Abreviation
+                                th(scope="col") Reference Value 
+                                th(scope="col") Measurement unit
+                                th(scope="col") Delete 
+                        tbody
+                            each son in children
+                                    tr 
+                                        th(scope="row") #{son.id} 
+                                        td #{son.name}
+                                        td #{son.abbreviation}
+                                        td 
+                                           .row
+                                                p.col  
+                                                p.col Male 
+                                                p.col Female
+                                           .row
+                                                p.col Max-Value 
+                                                p.col #{son.value_max_male}
+                                                p.col #{son.value_max_female}
+                                           .row
+                                                p.col Min-Value 
+                                                p.col #{son.value_min_male}
+                                                p.col #{son.value_min_female}
+                                        td #{son.measurement}
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=son.id class="btnDeleteDeterminant")
+                                                    i(class="fa-solid fa-trash px-1 text-danger")

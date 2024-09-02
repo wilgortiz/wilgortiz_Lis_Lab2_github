@@ -1,0 +1,27 @@
+div(class="table-responsive mt-4" id="tabla-users")
+                    table(class="table  table-hover h6 mt-3 rounded")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") N°
+                                th(scope="col") Name
+                                th(scope="col") Dni
+                                th(scope="col") Rol
+                                th(scope="col") Email 
+                                th(scope="col") Update 
+                                th(scope="col") Delet
+                        tbody
+                            each user in users
+                                    tr(class= user.active ? '' : 'table-danger')
+                                        th(scope="row")  #{user.id}
+                                        td #{user.first_name+' '+user.last_name}
+                                        td #{user.dni}
+                                        td #{user.rol}
+                                        td #{user.email}
+                                        td 
+                                            div(class="w-100")
+                                                a(href="" id=user.id class="btnUpdateUser")
+                                                    i(class="fa-solid fa-pen px-1 text-warning agrandar")
+                                        td 
+                                            div(class="w-100")
+                                                a(href="" id=user.id class="btnDeleteUser")
+                                                    i(class="fa-solid fa-circle-minus px-1 text-danger agrandar")

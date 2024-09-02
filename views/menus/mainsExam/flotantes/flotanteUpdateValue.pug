@@ -1,0 +1,49 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Modificar Valores de Referencia:
+    form(id="updateValueForm")
+        input(type="hidden" value=referenceValue.id name="id" id="idNewValue")
+        .row
+            div(class="col p-0 my-3 form-check form-switch d-flex flex-row align-items-center justify-content-start")
+                - if (referenceValue.active)
+                  input(class="form-check-input h5 mx-2" type="checkbox" name="active" id="active" checked)
+                - else
+                  input(class="form-check-input h5 mx-2" type="checkbox" name="active" id="active")
+                label(class="form-check-label h6" for="btnActive") Activo   
+        .row
+            div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+                label(for="minValue") Min. Value:
+                input(class="py-2 inputses2 h6 m-2" id="minValue" name="min_value" type="text" value=referenceValue.min_value)
+            div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+                label(for="maxValue") Max. Value:
+                input(class="py-2 inputses2 h6 m-2 " id="maxValue" name="max_value" type="text" value=referenceValue.max_value)
+        .row
+            div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+                label(for="maxLimit") Limit max:
+                input(class="py-2 inputses2 h6 m-2 " id="maxLimit" name="max_limit" type="text" value=referenceValue.max_limit)
+            div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+                label(for="minLimit") Limit min:
+                input(class="py-2 inputses2 h6 m-2" id="minLimit" name="min_limit" type="text" value=referenceValue.min_limit)
+        .row
+            div(class="col mt-2 d-flex flex-column justify-content-start w-50 h6")  
+                label(for="ageRange") Rango de edad:
+                select(name="age_range" id="ageRange")
+                    option(selected disabled) #{referenceValue.age_min} a #{referenceValue.age_max}
+                    option(value="1-10") 1 a 10 años
+                    option(value="11-40") 11 a 40 años 
+                    option(value="41-100") 41 a 100 años
+            div(class="col  mt-2 d-flex flex-column justify-content-start w-50 h6") 
+                label(for="genderValue") Genero:   
+                select(class="form-select p-2" id="genderValue" name="gender")
+                    option(selected value=referenceValue.gender) #{referenceValue.gender}
+                    option(value="femenino") femenino
+                    option(value="masculino") masculino  
+            div(class="col  mt-2 d-flex flex-column justify-content-start w-50 h6")  
+                label(for="pregnant") Embarazo:  
+                select(class="form-select p-2" id="pregnant" name="pregnant")
+                    option(selected value=referenceValue.pregnant) #{referenceValue.pregnant}
+                    option(value="1") Sí
+                    option(value="0") No
+        .w-100.d-flex.justify-content-center.mt-3
+            button.btn.btn-primary.text.white(id="btnRegisterUpdateValue") Guardar modificaciones 

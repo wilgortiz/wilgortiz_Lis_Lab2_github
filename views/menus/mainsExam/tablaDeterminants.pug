@@ -1,0 +1,31 @@
+table(class="table  table-hover h6 mt-3 rounded")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") Name
+                                th(scope="col") Abbreviation
+                                th(scope="col") Detail
+                                th(scope="col") Measurement unit
+                                th(scope="col") Reference Value 
+                                th(scope="col") Update 
+                                th(scope="col") Delete 
+                        tbody
+                            each determinant in determinants
+                                    tr(class= determinant.active ? '' : 'table-danger') 
+                                        th(scope="row")  #{determinant.id}
+                                        td #{determinant.name}
+                                        td #{determinant.abbreviation}
+                                        td #{determinant.detail}
+                                        td #{determinant.measurement}
+                                        td
+                                            div(class="w-100 text-center")
+                                                a(href="" id=determinant.id class="btnViewValueReference")
+                                                    i(class="fa-solid fa-eye px-1 text-success agrandar")
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=determinant.id class="btnUpdateDeterminant")
+                                                    i(class="fa-solid fa-pen px-1 text-warning agrandar")
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=determinant.id class="btnDeleteDeterminant")
+                                                    i(class="fa-solid fa-trash px-1 text-danger agrandar")

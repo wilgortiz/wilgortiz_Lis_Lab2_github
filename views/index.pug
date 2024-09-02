@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  include navSuperior.pug
+  div(class="w-100 h-100 position-relative") 
+    img(class="img-fluid" src="images/fondoHome.png" alt="" id="imagen")
+    div(class="position-absolute top-0 start-0 p-5 h-100 w-50 d-flex align-items-center")
+       div(class="" id="textoprincipal" style="z-index:1;")
+        h1(class="letraTitulo") System Laboratory
+        h6(class="letraChida text-secondary") Take care and live better in our center
+        button(class="btn bg-white my-3 rounded shadow-sm border")
+          a(class="enlace text-dark letraChida h6 w-100 h-100") More info...
+        button(class="btn my-3 rounded mx-3 shadow-sm" style="background-color:#9e00c5")
+          a(class="text-white letraChida h6 w-100 h-100 sinDeco" href="../login") Log in

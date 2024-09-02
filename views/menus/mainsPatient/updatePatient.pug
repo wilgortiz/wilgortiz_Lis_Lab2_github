@@ -1,0 +1,47 @@
+div(class="mt-3 p-4 border shadow-sm bg-white d-flex flex-column w-100 h-100 rounded") 
+    p(class="letraChida h4") Actualizar Paciente
+    span(class="letraChida h6 text-secondary") Ingrese la información del paciente
+    form(class="pt-5 w-100")
+        legend(class="letraChida h4") Información Personal
+        .row
+            div(class="col-md-4 mb-3")
+                label(for="dni") DNI:
+                input(class="form-control h6" id="dni" name="dni" type="text" value=users[0].dni)
+            div(class="col-md-4 mb-3")
+                label(for="first_name") Nombre:
+                input(class="form-control h6" id="first_name" name="first_name" type="text" value=users[0].first_name)
+            div(class="col-md-4 mb-3")
+                label(for="last_name") Apellido:
+                input(class="form-control h6" id="last_name" name="last_name" type="text" value=users[0].last_name)
+        .row
+            div(class="col-md-4 mb-3")
+                label(for="phone") Teléfono:
+                input(class="form-control h6" id="phone" name="phone" type="text" value=users[0].phone)
+            div(class="col-md-4 mb-3")
+                label(for="email") Email:
+                input(class="form-control h6" id="email" name="email" type="email" value=users[0].email)
+            div(class="col-md-4 mb-3")
+                label(for="password") Contraseña:
+                input(class="form-control h6" id="clave" name="clave" type="password" value=users[0].clave)
+        .row
+            div(class="col-md-4 mb-3")
+                label(for="location") Ubicación:
+                input(class="form-control h6" id="location" name="location" type="text" value=users[0].location)
+            div(class="col-md-4 mb-3")
+                select(class="form-select h6" id="gender" name="gender")
+                    each option in ['masculino', 'femenino', 'Otro']
+                        option(value=option, selected=(option === users[0].gender))= option
+            div(class="col-md-4 mb-3 d-flex align-items-center")
+                input(class="form-check-input h5 me-2" type="checkbox" name="active" id="active" checked=(users[0].active))
+                label(class="form-check-label h6" for="active") Activo 
+        .row
+            div(class="col-md-4 mb-3")
+                label(for="birthdate") Fecha de cumpleaños:
+                input(class="form-control h6" id="birthdate" name="birthdate" type="date" value=users[0].birthdate)
+            //div(class="col-md-4 mb-3")
+                label(for="diagnostic") Diagnóstico:
+                input(class="form-control h6" id="diagnostic" name="diagnostic" type="text" value=users[0].diagnostic)
+            div(class="col-md-4 mb-3")
+                input(class="form-control h6" id="id" name="id" type="hidden" value=users[0].id)
+        div(class="mt-5 w-100 d-flex justify-content-center")
+            button(class="btn mt-5 text-white rounded w-25 letraChida shadow-sm" style="background-color:#1e95d1" id="btnupdate") Actualizar Paciente

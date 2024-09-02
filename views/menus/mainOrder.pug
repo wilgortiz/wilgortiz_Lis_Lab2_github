@@ -1,0 +1,247 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Gestión de Órdenes
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet")
+
+    script(src="https://kit.fontawesome.com/a076d05399.js", crossorigin="anonymous")
+      
+    
+
+
+
+  body
+    div(class="position-absolute top-50 start-50 translate-middle d-flex invisible" id="invisible" style="z-index:1")
+      div.border.rounded(id="contenedor-flotante")
+    div(class="mt-1 p-4 border shadow-sm bg-white d-flex flex-column w-100 h-100 rounded" id="viewOrder") 
+      //-div(class="mt-3 p-4 border shadow-sm bg-white d-flex flex-column w-100 h-100 rounded" id="viewOrder") 
+      p(class="letraChida h4") Ordenes
+      span(class="letraChida h6 text-secondary")
+      span(class="letraChida h6 text-secondary") #{admin.rol} 
+      //-Crea una orden nueva o busca una existente para modificarla o eliminarla
+      .row.border.my-4.rounded.bg-white.shadow-sm(id="contenido-order")
+        .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+             p(class="letraChida h5 p-3") Orden:
+             .position-relative.mx-2
+                  input(class="inputSearch rounded-pill h6 p-2" placeholder="Nombre del paciente" id="nameOrderSearch" name="nameOrderearch" type="text")
+                  .d-flex.align-items-center.position-absolute.end-0.top-50.px-2
+                      i(class="fa-solid fa-magnifying-glass fa-xs agrandar" style="color: rgba(255, 255, 255, 0.648);" id="btnSearchOrder")
+             .d-flex.justify-content-center.p-3.w-100.align-items-end.flex-column
+                  i(class="fa-solid fa-plus text-white agrandar h4" id="btnAddOrder") 
+        div(class="table-responsive mt-3" id="tabla-Order")
+          table(class="table table-hover h6 mt-2  rounded")
+            thead
+              tr
+                th(scope="col") N°
+                th(scope="col") Nombre paciente
+                th(scope="col") Dni
+                th(scope="col") Diagnostico del paciente
+                th(scope="col") Embarazo
+                th(scope="col") Estado de la Orden
+                //th(scope="col") Actualizar estado de orden
+                th(scope="col") Fecha Carga de Orden
+                th(scope="col") Fecha Entrega Resultados
+                th(scope="col") Observaciones
+                th(scope="col") Examenes
+                th(scope="col") Muestras
+                th Actualizar Orden
+                th Agregar Resultados
+                th Resultados Analisis
+                //-th result analisis 
+                th Cancelar Orden
+            tbody
+              each order in orders
+                tr(class= order.active ? '' : 'table-danger')
+                  th(scope="row") #{order.id}
+                  td #{order.User.first_name+' '+order.User.last_name}
+                  td #{order.User.dni}
+                  td #{order.diagnostic}
+                  td #{order.User.pregnant}
+                  td(style="background-color: #d4edda; color: #155724") #{order.state}
+                  //td 
+                      div(class="w-100")
+                          a(href="" id=order.id class="btnUpdateStateOrder")
+                              i(class="fa-solid fa-lg  fa-group-arrows-rotate px-4 text-success agrandar")
+                  td #{order.fechaIngresoFormatted}
+                  //-td #{order.fechaIngreso}
+                  td #{order.fechaEntregaResultados} 
+                  td #{order.observations}                   
+                  td                  
+                      div(class="w-100")
+                          a(href="" id=order.id class="btnViewExam")
+                              i(class="fa-solid fa-lg fa-notes-medical px-4 text-primary agrandar")
+                  td
+                      div(class="w-100")
+                          a(href="" id=order.id data-role=admin.rol  class="btnViewSamples")
+                              i(class="fa-solid fa-lg fa-vial px-4 text-primary agrandar")
+                  td 
+                      div(class="w-100")
+                          a(href="" id=order.id class="btnUpdateOrder")
+                              i(class="fa-solid fa-lg fa-file-pen px-4 text-success agrandar")                  
+                  if admin.rol != "Administrative"
+                    td
+                      div(class="w-100")
+                        a(href="#" id=order.id class="btnAddResults")
+                          i(class="fa-solid fa-lg fa-square-plus px-4 text-primary agrandar")
+                  else
+                    td
+                  td
+                    div(class="w-100")
+                      a(href="" id=order.id data-estado=order.state class="btnViewResults")
+                        i(class="fa-solid fa-lg fa-file-lines px-4 text-primary agrandar")
+                  //td
+                    div(class="w-100")
+                      a(href="" id=order.id class="btnViewResultsAnalisis")
+                        i(class="fa-solid fa-trash px-2 text-danger agrandar")
+                  td
+                    div(class="w-100")
+                      a(href="" id=order.id class="btnCancelOrder")
+                        i(class="fa-solid fa-lg fa-rectangle-xmark px-2 text-danger agrandar")
+    .row.border.my-4.rounded.bg-white.shadow-sm.d-none(id="contenido-exam")
+      .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+           p(class="letraChida h5 p-3") Exams:
+           .position-relative.mx-1
+                input(class="inputSearch rounded-pill h6 p-2" placeholder="Name" id="nameExamSearch" name="nameExamSearch" type="text")
+                .d-flex.align-items-center.position-absolute.end-0.top-50.px-2
+                    i(class="fa-solid fa-magnifying-glass fa-xs agrandar" style="color: rgba(255, 255, 255, 0.648);" id="btnSearchExam")
+           .d-flex.justify-content-center.p-3.w-100.align-items-end.flex-column
+                i(class="fa-solid fa-plus text-white agrandar h4" id="btnAddExam") 
+      div(class="table-responsive mt-4" id="tabla-exams")
+                    table(class="table  table-hover h6 mt-3 rounded")
+                        thead
+                            tr
+                                th(scope="col") ID
+                                th(scope="col") Name
+                                th(scope="col") Abbreviation
+                                th(scope="col") Detail
+                                th(scope="col") Delete 
+                        tbody
+                                    tr
+                                        th(scope="row")  
+                                        td 
+                                        td
+                                        td 
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id='' class="btnDeleteExam")
+                                                    i(class="fa-solid fa-rectangle-xmark px-1 text-danger agrandar")
+                                                    
+    .row.border.my-4.rounded.bg-white.shadow-sm.d-none(id="contenido-sample")
+      .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+           p(class="letraChida h5 p-3") Samples required:
+           input(class="d-none" value='' id="orderId")
+           input(class="d-none" value='' id="userId")
+           .position-relative.mx-1
+                input(class="inputSearch rounded-pill h6 p-2" placeholder="Type" id="nameSampleSearch" name="nameSampleSearch" type="text")
+                .d-flex.align-items-center.position-absolute.end-0.top-50.px-2
+                    i(class="fa-solid fa-magnifying-glass fa-xs agrandar" style="color: rgba(255, 255, 255, 0.648);" id="btnSearchSample")
+      div(class="table-responsive mt-4" id="tabla-samples")
+                    table(class="table  table-hover h6 mt-3 rounded text-center")
+                        thead
+                            tr
+                                th(scope="col") ID
+                                th(scope="col") Type
+                                th(scope="col") Detail
+                                th(scope="col") Deliver 
+                        tbody
+                            
+                                    tr
+                                        th(scope="row")  
+                                        td 
+                                        td 
+                                        td
+                                          if admin.rol == "Administrative"
+                                            div(class="w-100 text-center")
+                                              a(href="" id='' class="btnDeliverSamples")
+                                                i(class="fa-solid fa-plus px-1 text-success agrandar")
+                                            //div(class="w-100 text-center")
+                                                a(href="" id='' class="btnDeliverSamples")
+                                                    i(class="fa-solid fa-plus px-1 text-success agrandar")
+div.container.mt-4.d-none(id="containerActualizarOrden")
+  div.card
+    div.card-body(style="font-family: 'Roboto', sans-serif;")
+      .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+        p(class="letraChida h5 p-3 mb-0") 
+            | Actualizar Orden 
+        | - 
+        span#orderDetails // Este span contendrá el ID y el nombre completo del paciente
+        button(type="button" class="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onclick="toggleFormVisibility()")
+
+      form#formUpdateOrder(class="d-none")
+        .row.mb-3.d-none //con d.none oculta esta fila completa 
+          .col-md-4
+            label(for="updateOrderId", class="form-label fs-5") ID de la orden:
+            input(type="text", id="updateOrderId", readonly class="input-verde form-control rounded-pill fs-6")
+          .col-md-4
+            label(for="updateOrderName", class="form-label fs-5") Nombre del paciente:
+            input(type="text", id="updateOrderName", class="form-control rounded-pill fs-6" readonly)
+          .col-md-4
+            label(for="updateOrderLastName", class="form-label fs-5") Apellido del paciente:
+            input(type="text", id="updateOrderLastName", class="form-control rounded-pill fs-6" readonly)
+        .row.mb-3
+          .col-md-4
+            label(for="updateOrderDiagnosis", class="form-label fs-5") Diagnóstico:
+            input(type="text", id="updateOrderDiagnosis", class="form-control rounded-pill fs-6")
+          .col-md-4
+            label(for="updateOrderPregnant", class="form-label fs-5") Embarazo:
+            select(id="updateOrderPregnant", class="form-select rounded-pill fs-6")
+              option(value="1") Sí
+              option(value="0") No
+          .col-md-4
+            label(for="updateOrderState", class="form-label fs-5") Estado de la Orden:
+            select(id="updateOrderState", class="form-select rounded-pill fs-6")
+              option(value="Esperando toma de muestra") Esperando toma de muestra
+              option(value="Analitica") Analitica
+              option(value="Pre Informe") Pre Informe
+              option(value="Para Validar") Para Validar
+              option(value="Informada") Informada
+        .row.mb-3
+          .col-md-4
+            label(for="updateOrderFechaIngreso", class="form-label fs-5") Fecha de ingreso:
+            input(type="date", id="updateOrderFechaIngreso", class="form-control rounded-pill fs-6")
+          .col-md-4
+            label(for="updateOrderFechaEntregaResultados", class="form-label fs-5") Fecha de entrega de Resultados:
+            input(type="date", id="updateOrderFechaEntregaResultados", class="form-control rounded-pill fs-6")
+          .col-md-4
+            label(for="updateOrderObservations", class="form-label fs-5") Observaciones:
+            input(type="text", id="updateOrderObservations", class="form-control rounded-pill fs-6")
+        .row
+          .col-12
+            button(type="submit", class="btn btn-primary mt-3 rounded-pill fs-5 w-100") Actualizar Orden 
+script(src="/scripsPatient.js")
+//div.container.mt-4.d-none(id="containerActualizarEstadoOrden")
+  div.card
+    div.card-body(style="font-family: 'Roboto', sans-serif;")
+      .d-flex.flex-row.bg-color.rounded-top.text-white.w-100.align-items-center
+        p(class="letraChida h5 p-3 mb-0") 
+            | Actualizar estado de la Orden 
+        | - 
+        span#orderDetails2 
+        button(type="button" class="btn-close position-absolute top-0 end-0 p-3" aria-label="Close" onclick="toggleFormVisibility2()")
+
+      form#formUpdateStateOrder(class="d-none")
+        .row.mb-3.d-none //con d.none oculta esta fila completa 
+          .col-md-4
+            label(for="updateOrderId", class="form-label fs-5") ID de la orden:
+            input(type="text", id="updateOrderId", readonly class="input-verde form-control rounded-pill fs-6")
+          .col-md-4
+            label(for="updateOrderName2", class="form-label fs-5") Nombre del paciente:
+            input(type="text", id="updateOrderName2", class="form-control rounded-pill fs-6" readonly)
+          .col-md-4
+            label(for="updateOrderLastName2", class="form-label fs-5") Apellido del paciente:
+            input(type="text", id="updateOrderLastName2", class="form-control rounded-pill fs-6" readonly)
+        .row.mb-3          
+          .col-md-4
+            label(for="updateOrderState", class="form-label fs-5") Estado de la Orden:
+            select(id="updateOrderState", class="form-select rounded-pill fs-6")
+              option(value="Esperando toma de muestra") Esperando toma de muestra
+              option(value="Analitica") Analitica
+              option(value="Pre Informe") Pre Informe
+              option(value="Para Validar") Para Validar
+              option(value="Informada") Informada       
+          .col-12
+            button(type="submit", class="btn btn-primary mt-3 rounded-pill fs-5 w-100") Actualizar estado de la Orden 
+//-script(src="/scripsPatient.js")

@@ -1,0 +1,69 @@
+doctype html 
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Resultados del Paciente
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet")
+    script(src="https://kit.fontawesome.com/a076d05399.js", crossorigin="anonymous")
+    style.
+      .bg-custom { background-color: #007bff; }
+      .input-search { border-radius: 50px; padding: 0.25rem 0.75rem; font-size: 0.875rem; }
+      .table th, .table td { vertical-align: middle; }
+      .text-custom { color: #fff; }
+      .close-btn { position: absolute; top: 0.5rem; right: 0.5rem; cursor: pointer; font-size: 1.25rem; color: #fff; }
+      .flotante-bg { background-color: rgba(255, 255, 255, 1); border-radius: 15px; padding: 1rem; }
+  body
+    .container-fluid.flotante-bg
+      .d-flex.flex-row.bg-custom.text-custom.rounded-top.p-3.align-items-center.position-relative
+        .d-flex.flex-column.w-100
+          p.h5.mb-0
+            | Resultados del paciente:
+          p.h5.mb-0
+            | #{patient.first_name} #{patient.last_name}
+        //-button.btn-close.btn-close-white.position-absolute.end-0.top-0.me-3#closeResultsFlotante(type="button" aria-label="Close")
+      
+      .patient-info.p-3.bg-light
+        p.mb-1.text-muted.fs-5
+          strong Edad: 
+          | #{patientAge} años
+        if hasResults
+          p.mb-1.text-muted.fs-5
+            strong Fecha de la orden: 
+            | #{new Date(results[0].Order.createdAt).toLocaleDateString()}
+          .d-flex.justify-content-end.mt-2.mb-3
+            button.btn.btn-primary#printResults
+              i.fas.fa-print.me-2
+              | Imprimir Resultados
+        
+      if hasResults
+        .table-responsive.mt-2#tabla-samples
+          each orderExam in results
+            .card.mb-4
+              .card-header.bg-light
+                h5.mb-0= orderExam.Exam.name
+              .card-body
+                table.table.table-hover.table-striped.h6
+                  thead
+                    tr
+                      th(scope="col") Determinacion
+                      th(scope="col") Resultado
+                      th(scope="col") Valor de referencia
+                  tbody
+                    each determinant, index in orderExam.Exam.Determinants
+                      tr
+                        td= `${determinant.name} (${determinant.measurement})`
+                        td
+                          if orderExam.Results[index] && orderExam.Results[index].value
+                            = orderExam.Results[index].value
+                          else
+                            | N/A
+                        td
+                          each ref in determinant.Value_references
+                            p= `${ref.min_value} - ${ref.max_value}`
+      else
+        .alert.alert-info.mt-4
+          p.mb-0 Aún no se han cargado resultados para este paciente.
+
+    script(src="/scriptsPatient.js")

@@ -1,0 +1,34 @@
+div(class="position-relative p-5 w-100 bg-white shadow rounded ")
+    div(class="position-absolute top-0 end-0 m-2") 
+        i(class="fa-solid fa-circle-xmark text-danger agrandar" id="btnCerrarFlot")
+    legend(class="letraChida h4") Actualizar usuario:
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="firstName") nombre:
+            input(class="py-2 inputses2 h6 m-2 " id="firstName" name="firstName" type="text" value=user.first_name)
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="lastName") apellido:
+            input(class="py-2 inputses2 h6 m-2" id="lastName" name="lastName" type="text" value=user.last_name)
+    .row
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="dni") Dni:
+            input(class="py-2 inputses2 h6 m-2 " id="dni" name="dni" type="text" value=user.dni)
+        div(class="col my-4 d-flex flex-column justify-content-start w-50 h6")    
+            label(for="email") Email:
+            input(class="py-2 inputses2 h6 m-2" id="email" name="email" type="text" value=user.email)
+    .row
+        div(class="col mt-2 d-flex flex-column  w-50 h6")    
+            select(class="form-select p-2" id="rol" name="rol" aria-label="Default select example")
+                    option(selected value=user.rol) #{user.rol}
+                    option(value="Bioquimic") Bioquimic
+                    option(value="Tecnic" ) Tecnic
+                    option(value="Administrative" ) Administrative
+        div(class="col p-0 my-3 form-check form-switch d-flex flex-row align-items-center justify-content-start")
+            - if (user.active)
+              input(class="form-check-input h5 mx-2" type="checkbox"  name="active" id="active" checked)
+            - else
+              input(class="form-check-input h5 mx-2" type="checkbox"  name="active"  id="active")
+            label(class="form-check-label h6" for="btnActive") Activo  
+            input(type="hidden" value=user.id id="idNewUser")
+    .w-100.d-flex.justify-content-center.mt-3
+        button.btn.btn-primary.text.white(id="btnRegNewUser") Actualizar usuario

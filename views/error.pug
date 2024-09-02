@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= message
+  if error
+    h2= error.status ? error.status : 'Sin estado'
+    pre #{error.stack ? error.stack : 'No se proporciona información de pila'}
+  else
+    h2 No hay información de error disponible
+
+
+
+

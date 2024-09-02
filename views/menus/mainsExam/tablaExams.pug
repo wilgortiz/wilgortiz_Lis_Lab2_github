@@ -1,0 +1,41 @@
+table(class="table  table-hover h6 mt-3 rounded")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") Name
+                                th(scope="col") Examen activo en la empresa?
+                                th(scope="col") Detalle
+                                th(scope="col") Abreviacion
+                                th(scope="col") Muestras
+                                th(scope="col") Determinaciones
+                                th(scope="col") Modificar 
+                                th(scope="col") Eliminar 
+                        tbody
+                            each exam in exams
+                                    tr(class= exam.active ? '' : 'table-danger')
+                                        th(scope="row")  #{exam.id}
+                                        td #{exam.name}
+                                        td #{exam.active}
+                                        td #{exam.detail}
+                                        td #{exam.abbreviation}                                       
+                                        td
+                                            div(class="w-100 text-center")
+                                                // Muestras asociadas
+                                                each sample in exam.Samples
+                                                    span #{sample.type}
+                                                    br
+                                        td
+                                            div(class="w-100 text-center")
+                                                // Determinantes asociados
+                                                each determinant in exam.Determinants 
+                                                    span #{determinant.name}
+                                                    br
+                                                       
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=exam.id class="btnUpdateExam")
+                                                    i(class="fa-solid fa-pen px-1 text-warning agrandar")
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" data-id=exam.id class="btnDeleteExam2")
+                                                    i(class="fa-solid fa-trash px-1 text-danger agrandar")

@@ -1,0 +1,28 @@
+.d-flex.flex-row.bg-color.rounded.text-white.w-100
+    legend(class="letraChida h5 p-3") Exam Subgroup:
+    .d-flex.justify-content-center.p-3
+        button(class="btn btn-primary rounded text-white" id="btnAddSubGroup")
+            i(class="fa-solid fa-plus px-1 text-white") 
+div(class="table-responsive mt-4")
+                    table(class="table table-bordered table-hover h6 mt-3")
+                        thead(class="")
+                            tr(class="")
+                                th(scope="col") ID
+                                th(scope="col") Name
+                                th(scope="col") Detail
+                                th(scope="col") Determinat
+                                th(scope="col") Delete
+                        tbody
+                             each son in children
+                                    tr 
+                                        th(scope="row")  #{son.id}
+                                        td #{son.name}
+                                        td #{son.detail}
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=son.id class="viewDeterminants")
+                                                    i(class="fa-solid fa-circle-plus px-1 text-success") 
+                                        td 
+                                            div(class="w-100 text-center")
+                                                a(href="" id=son.id class="btnDeleteEsg")
+                                                    i(class="fa-solid fa-trash px-1 text-danger")
